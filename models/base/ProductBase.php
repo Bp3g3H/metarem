@@ -5,7 +5,7 @@ namespace app\models\base;
 use Yii;
 use app\models\OrderList;
 use app\models\Order;
-
+use app\models\Firm;
 /**
  * This is the model class for table "product".
  *
@@ -26,6 +26,7 @@ use app\models\Order;
  *
  * @property OrderList[] $orderLists
  * @property Order[] $orders
+ * @property Firm $firm
  */
 class ProductBase extends \yii\db\ActiveRecord
 {
@@ -47,6 +48,7 @@ class ProductBase extends \yii\db\ActiveRecord
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['product_name', 'material'], 'string', 'max' => 255],
+            [['firm_id'], 'exist', 'skipOnError' => true, 'targetClass' => Firm::className(), 'targetAttribute' => ['firm_id' => 'id']],
         ];
     }
 
@@ -87,5 +89,13 @@ class ProductBase extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['id' => 'order_id'])->viaTable('order_list', ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFirm()
+    {
+        return $this->hasOne(Firm::className(), ['id' => 'firm_id']);
     }
 }

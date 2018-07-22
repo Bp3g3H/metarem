@@ -48,6 +48,8 @@ class m180720_165442_creating_user_table extends Migration
             'updated_at' => $this->dateTime(),
         ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
 
+        $this->addForeignKey('product_firm_id', 'product', 'firm_id', 'firm', 'id');
+
         $this->createTable('order',[
             'id' => $this->primaryKey(),
             'firm_id' => $this->integer(11),
@@ -75,6 +77,7 @@ class m180720_165442_creating_user_table extends Migration
         $this->dropForeignKey('order_list_order_id', 'order_list');
         $this->dropForeignKey('order_list_product_id', 'order_list');
         $this->dropForeignKey('order_firm_id', 'order');
+        $this->dropForeignKey('product_firm_id', 'product');
 
         $this->dropTable('order_list');
         $this->dropTable('order');

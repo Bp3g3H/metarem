@@ -62,6 +62,11 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
+                'label' => 'Products',
+                'url' => ['/product'],
+                'visible' => !Yii::$app->user->isGuest
+            ],
+            [
                 'label' => 'Orders',
                 'url' => ['/order'],
                 'visible' => !Yii::$app->user->isGuest

@@ -14,39 +14,39 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'firm_id') ?>
-
-    <?= $form->field($model, 'product_name') ?>
-
-    <?= $form->field($model, 'quantity') ?>
-
-    <?= $form->field($model, 'material') ?>
-
-    <?php // echo $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'weight') ?>
-
-    <?php // echo $form->field($model, 'price_for_cutting') ?>
-
-    <?php // echo $form->field($model, 'full_weight') ?>
-
-    <?php // echo $form->field($model, 'single_price_with_material') ?>
-
-    <?php // echo $form->field($model, 'full_price') ?>
-
-    <?php // echo $form->field($model, 'price_with_dds') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    <div class="row">
+        <div class="col-sm-2">
+            <?= $form->field($model, 'firm_id') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'product_name') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'quantity') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'material') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'created_at') ?>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group" style="margin-top: 25px;">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Reset', \yii\helpers\Url::to('/product/index'), ['class' => 'btn btn-default'])?>
+            </div>
+        </div>
     </div>
+
+
+
+
+
+
+
+
+
+
 
     <?php ActiveForm::end(); ?>
 

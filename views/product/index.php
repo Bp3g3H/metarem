@@ -11,34 +11,26 @@ $this->title = 'Products';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
+    <div class="row">
+        <div class="col-sm-10">
+            <h1 style="margin-top: 0"><?= Html::encode($this->title) ?></h1>
+        </div>
+        <div class="col-sm-2">
+            <?= Html::a('Create product', ['create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
+        </div>
+    </div>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'firm_id',
+            'firm.name',
             'product_name',
             'quantity',
             'material',
-            // 'price',
-            // 'weight',
-            // 'price_for_cutting',
-            // 'full_weight',
-            // 'single_price_with_material',
-            // 'full_price',
-            // 'price_with_dds',
-            // 'created_at',
-            // 'updated_at',
-
+            'weight',
+            'price',
+            'created_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
