@@ -6,14 +6,15 @@ use Yii;
 use app\models\OrderList;
 use app\models\Order;
 use app\models\Firm;
+use app\models\Material;
 /**
  * This is the model class for table "product".
  *
- * @property integer $id
- * @property integer $firm_id
+ * @property int $id
+ * @property int $firm_id
  * @property string $product_name
- * @property integer $quantity
- * @property string $material
+ * @property int $quantity
+ * @property int $material_id
  * @property string $price
  * @property string $weight
  * @property string $price_for_cutting
@@ -27,11 +28,12 @@ use app\models\Firm;
  * @property OrderList[] $orderLists
  * @property Order[] $orders
  * @property Firm $firm
+ * @property Material $material
  */
 class ProductBase extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -39,21 +41,22 @@ class ProductBase extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['firm_id', 'quantity'], 'integer'],
+            [['firm_id', 'quantity', 'material_id'], 'integer'],
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['product_name', 'material'], 'string', 'max' => 255],
+            [['product_name'], 'string', 'max' => 255],
             [['firm_id'], 'exist', 'skipOnError' => true, 'targetClass' => Firm::className(), 'targetAttribute' => ['firm_id' => 'id']],
+            [['material_id'], 'exist', 'skipOnError' => true, 'targetClass' => Material::className(), 'targetAttribute' => ['material_id' => 'id']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -62,7 +65,7 @@ class ProductBase extends \yii\db\ActiveRecord
             'firm_id' => 'Firm ID',
             'product_name' => 'Product Name',
             'quantity' => 'Quantity',
-            'material' => 'Material',
+            'material_id' => 'Material ID',
             'price' => 'Price',
             'weight' => 'Weight',
             'price_for_cutting' => 'Price For Cutting',
@@ -97,5 +100,13 @@ class ProductBase extends \yii\db\ActiveRecord
     public function getFirm()
     {
         return $this->hasOne(Firm::className(), ['id' => 'firm_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMaterial()
+    {
+        return $this->hasOne(Material::className(), ['id' => 'material_id']);
     }
 }

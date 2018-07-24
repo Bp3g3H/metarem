@@ -5,26 +5,27 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
+use app\models\Material;
 
 /**
- * UserSearch represents the model behind the search form about `app\models\User`.
+ * MaterialSearch represents the model behind the search form of `app\models\Material`.
  */
-class UserSearch extends User
+class MaterialSearch extends Material
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
-            [['username', 'password', 'name', 'email', 'created_at', 'updated_at'], 'safe'],
+            [['id'], 'integer'],
+            [['name', 'created_at', 'updated_at'], 'safe'],
+            [['price'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -41,7 +42,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Material::find();
 
         // add conditions that should always apply here
 
@@ -51,18 +52,21 @@ class UserSearch extends User
 
         $this->load($params);
 
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
+            'price' => $this->price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

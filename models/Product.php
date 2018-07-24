@@ -27,6 +27,15 @@ class Product extends ProductBase
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        $this->price_for_cutting = $this->price * $this->quantity;
+        $this->full_weight = $this->weight * $this->quantity;
+        $this->single_price_with_material = $this->price + ($this->weight * $this->material->price);
+        $this->full_price = $this->single_price_with_material * $this->quantity;
+        $this->price_with_dds = $this->full_price * 1.2;
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         $order = $this->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();

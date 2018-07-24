@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
+/* @var $firms array */
+/* @var $materials array */
 
 $this->title = 'Update Product: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -16,6 +18,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'firms' => $firms,
+        'materials' => $materials
     ]) ?>
 
 </div>

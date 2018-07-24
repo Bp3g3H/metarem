@@ -6,37 +6,26 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $firms array */
+/* @var $materials array */
+
 ?>
 
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'firm_id')->textInput() ?>
+    <?= $form->field($model, 'firm_id')->dropDownList($firms) ?>
 
     <?= $form->field($model, 'product_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 
-    <?= $form->field($model, 'material')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'material_id')->dropDownList($materials) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'price_for_cutting')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'full_weight')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'single_price_with_material')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'full_price')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'price_with_dds')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
