@@ -16,19 +16,19 @@ use yii\widgets\ActiveForm;
     ]); ?>
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($model, 'firm_id') ?>
+            <?= $form->field($model, 'created_at')->label('Дата') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'product_name') ?>
+            <?= $form->field($model, 'firm_id')->label('Фирма') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'quantity') ?>
+            <?= $form->field($model, 'product_name')->label('Детайл') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'material') ?>
+            <?= $form->field($model, 'quantity')->label('Количество') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'created_at') ?>
+            <?= $form->field($model, 'material')->label('Материал') ?>
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
