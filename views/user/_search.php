@@ -16,21 +16,21 @@ use yii\widgets\ActiveForm;
     ]); ?>
     <div class="row">
         <div class="col-sm-2">
-            <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getStatusArr()) ?>
+            <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getStatusArr())->label('Статус') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'username') ?>
+            <?= $form->field($model, 'username')->label('Потребителско име') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'name') ?>
+            <?= $form->field($model, 'name')->label('Име') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'email')->label('Емайл') ?>
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
-                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Reset', \yii\helpers\Url::to('/user/index'), ['class' => 'btn btn-default'])?>
+                <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to('user/index'), ['class' => 'btn btn-default'])?>
             </div>
         </div>
     </div>

@@ -83,8 +83,13 @@ class ProductController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
+            $firms =ArrayHelper::map(Firm::find()->all(), 'id', 'name');
+            $materials = ArrayHelper::map(Material::find()->all(), 'id', 'name');
+
             return $this->render('update', [
                 'model' => $model,
+                'firms' => $firms,
+                'materials' => $materials
             ]);
         }
     }

@@ -15,20 +15,20 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'firm_id')->dropDownList($firms) ?>
+    <?= $form->field($model, 'firm_id')->dropDownList($firms)->label('Фирма') ?>
 
-    <?= $form->field($model, 'product_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'product_name')->textInput(['maxlength' => true])->label('Име на продукта') ?>
 
-    <?= $form->field($model, 'quantity')->textInput() ?>
+    <?= $form->field($model, 'quantity')->textInput()->label('Количество') ?>
 
-    <?= $form->field($model, 'material_id')->dropDownList($materials) ?>
+    <?= $form->field($model, 'material_id')->dropDownList($materials)->label('Материал') ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'price')->textInput(['maxlength' => true])->label('Цена') ?>
 
-    <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'weight')->textInput(['maxlength' => true])->label('Тегло') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Създаване' : 'Актуализиране', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

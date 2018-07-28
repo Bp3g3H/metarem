@@ -32,8 +32,8 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
-                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Reset', \yii\helpers\Url::to('/product/index'), ['class' => 'btn btn-default'])?>
+                <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to('/product/index'), ['class' => 'btn btn-default'])?>
             </div>
         </div>
     </div>

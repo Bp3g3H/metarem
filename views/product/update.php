@@ -7,10 +7,9 @@ use yii\helpers\Html;
 /* @var $firms array */
 /* @var $materials array */
 
-$this->title = 'Update Product: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Актуализация на продукт: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Продукти', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id];
 ?>
 <div class="product-update">
 

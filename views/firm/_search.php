@@ -17,24 +17,24 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($model, 'name') ?>
+            <?= $form->field($model, 'name')->label('Име') ?>
         </div>
         <div class="col-sm-2">
-            <?php  echo $form->field($model, 'country') ?>
+            <?php  echo $form->field($model, 'country')->label('Държава') ?>
         </div>
         <div class="col-sm-2">
-            <?php  echo $form->field($model, 'city') ?>
+            <?php  echo $form->field($model, 'city')->label('Град') ?>
         </div>
          <div class="col-sm-2">
-            <?php  echo $form->field($model, 'owner_name') ?>
+            <?php  echo $form->field($model, 'owner_name')->label('Собственик') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'email')->label('Емайл') ?>
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
-                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Reset', \yii\helpers\Url::to('index'), ['class' => 'btn btn-default'])?>
+                <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to('index'), ['class' => 'btn btn-default'])?>
             </div>
         </div>
     </div>

@@ -7,31 +7,47 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\MaterialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Materials';
+$this->title = 'Материали';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="material-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Material', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <div class="row">
+        <div class="col-sm-10">
+            <h1 style="margin-top: 0"><?= Html::encode($this->title) ?></h1>
+        </div>
+        <div class="col-sm-2">
+            <?= Html::a('Създаване на материал', ['create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
+        </div>
+    </div>
+    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'price',
-            'created_at',
-            'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+             [
+                 'attribute' => 'name',
+                 'label' => 'Материал',
+             ],
+            [
+                'attribute' => 'price',
+                'label' => 'Цена',
+                'content' => function($data){
+                    return $data->price . 'лв';
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'label' => 'Дата',
+                'content' => function($data)
+                {
+                    $time = strtotime($data->created_at);
+                    return date('d.m.Y',$time) . 'г';
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'contentOptions' => ['style' => 'width: 5%']
+            ],
         ],
     ]); ?>
 </div>

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\FirmSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Firms';
+$this->title = 'Фирми';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="firm-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h1 style="margin-top: 0"><?= Html::encode($this->title) ?></h1>
         </div>
         <div class="col-sm-2">
-            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
+            <?= Html::a('Добави фирма', ['firm/create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
         </div>
     </div>
 
@@ -25,18 +25,42 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            'name',
-            'country',
-            'city',
-            'address',
-            'owner_name',
-            'email:email',
-            'phone_number',
-            'created_at',
+            [
+                'attribute' => 'name',
+                'label' => 'Име',
+            ],
+            [
+                'attribute' => 'country',
+                'label' => 'Държава',
+            ],
+            [
+                'attribute' => 'city',
+                'label' => 'Град',
+            ],
+            [
+                'attribute' => 'address',
+                'label' => 'Адрес',
+            ],
+            [
+                'attribute' => 'owner_name',
+                'label' => 'Собственик',
+            ],
+            [
+                'attribute' => 'email',
+                'label' => 'Емайл',
+            ],
+            [
+                'attribute' => 'phone_number',
+                'label' => 'Тел. номер',
+            ],
+            [
+                'attribute' => 'created_at',
+                'label' => 'Дата на добавяне',
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['style' => 'width: 6%'],
-                'template' => '{view} {update} {delete}',
+                'contentOptions' => ['style' => 'width: 5%'],
+                'template' => '{update} {delete}',
             ],
         ],
     ]); ?>

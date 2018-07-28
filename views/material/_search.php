@@ -14,22 +14,22 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'price') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
-
+    <div class="row">
+        <div class="col-sm-2">
+            <?= $form->field($model, 'name')->label('Материал') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'price')->label('Цена') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'created_at')->label('Дата') ?>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group" style="margin-top: 25px;">
+                <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Reset', \yii\helpers\Url::to('material/index'), ['class' => 'btn btn-default'])?>
+            </div>
+        </div>
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

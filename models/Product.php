@@ -40,15 +40,17 @@ class Product extends ProductBase
 
     public function afterSave($insert, $changedAttributes)
     {
-        $order = $this->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();
-
-        if (!$order)
+        if($insert)
         {
-            $order = Order::create($this->firm_id);
+            $order = $this->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();
+
+            if (!$order)
+            {
+                $order = Order::create($this->firm_id);
+            }
+
+            OrderList::create($order->id, $this->id);
         }
-
-        OrderList::create($order->id, $this->id);
-
         parent::afterSave($insert, $changedAttributes);
     }
 }

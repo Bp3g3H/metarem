@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Метарем',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -52,32 +52,37 @@ AppAsset::register($this);
                 'visible' => Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Users',
+                'label' => 'Потребители',
                 'url' => ['/user'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Firms',
+                'label' => 'Фирми',
                 'url' => ['/firm'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Products',
+                'label' => 'Продукти',
                 'url' => ['/product'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Orders',
+                'label' => 'Материали',
+                'url' => ['/material'],
+                'visible' => !Yii::$app->user->isGuest
+            ],
+            [
+                'label' => 'Поръчки',
                 'url' => ['/order'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Order List',
+                'label' => 'Списък на поръчките',
                 'url' => ['/order-list'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' =>  Yii::$app->user->isGuest ? 'Login' : 'Logout (' . Yii::$app->user->identity->username . ')',
+                'label' =>  Yii::$app->user->isGuest ? 'Влизане' : 'Излизане (' . Yii::$app->user->identity->username . ')',
                 'url' => Yii::$app->user->isGuest ? ['/site/login'] : ['/site/logout'],
                 'linkOptions' => ['class' => 'btn btn-link logout']
             ],
@@ -88,6 +93,7 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => ['url'=>'site/index','label'=>'Начална страница'],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>

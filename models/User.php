@@ -11,8 +11,8 @@ class User extends UserBase implements \yii\web\IdentityInterface
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
 
-    const STATUS_ACTIVE_LABEL = 'Active';
-    const STATUS_INACTIVE_LABEL = 'Inactive';
+    const STATUS_ACTIVE_LABEL = 'Активен';
+    const STATUS_INACTIVE_LABEL = 'Неактивен';
 
     public function behaviors()
     {

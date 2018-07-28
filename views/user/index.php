@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Потребители';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -17,14 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <h1 style="margin-top: 0"><?= Html::encode($this->title) ?></h1>
         </div>
         <div class="col-sm-2">
-            <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
+            <?= Html::a('Създай потребител', ['create'], ['class' => 'btn btn-success', 'style' => 'float:right']) ?>
         </div>
     </div>
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-//        'filterModel' => $searchModel,
         'columns' => [
             [
                 'label' => false,
@@ -36,18 +35,30 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'contentOptions' => ['style' => 'width: 3%'],
             ],
-            'username',
-            'name',
-            'email:email',
-             'created_at',
+            [
+                'attribute' => 'username',
+                'label' => 'Потребителско име',
+            ],
+            [
+                'attribute' => 'name',
+                'label' => 'Име',
+            ],
+            [
+                'attribute' => 'email',
+                'label' => 'Емайл',
+            ],
+            [
+                'attribute' => 'created_at',
+                'label' => 'Дата',
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['style' => 'width: 6%'],
-                'template' => '{view} {update} {delete}',
+                'contentOptions' => ['style' => 'width: 5%'],
+                'template' => '{update} {delete}',
                 'visibleButtons' => [
                     'delete' => function($model){
                         return $model->id != Yii::$app->user->id;
-       },
+                    },
                 ]
             ],
         ],

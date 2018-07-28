@@ -8,8 +8,8 @@ use yii\helpers\Html;
 /* @var $firms array */
 /* @var $materials array */
 
-$this->title = 'Create Product';
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->title = 'Създаване на продукт';
+$this->params['breadcrumbs'][] = ['label' => 'Продукти', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
