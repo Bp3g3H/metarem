@@ -3,10 +3,10 @@
 namespace app\models\base;
 
 use Yii;
-use app\models\OrderList;
 use app\models\Order;
 use app\models\Firm;
 use app\models\Material;
+
 /**
  * This is the model class for table "product".
  *
@@ -24,11 +24,11 @@ use app\models\Material;
  * @property string $price_with_dds
  * @property string $created_at
  * @property string $updated_at
+ * @property int $order_id
  *
- * @property OrderList[] $orderLists
- * @property Order[] $orders
  * @property Firm $firm
  * @property Material $material
+ * @property Order $order
  */
 class ProductBase extends \yii\db\ActiveRecord
 {
@@ -46,12 +46,14 @@ class ProductBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['firm_id', 'quantity', 'material_id'], 'integer'],
+            [['firm_id', 'quantity', 'material_id', 'order_id'], 'integer'],
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
+            [['order_id'], 'required'],
             [['product_name'], 'string', 'max' => 255],
             [['firm_id'], 'exist', 'skipOnError' => true, 'targetClass' => Firm::className(), 'targetAttribute' => ['firm_id' => 'id']],
             [['material_id'], 'exist', 'skipOnError' => true, 'targetClass' => Material::className(), 'targetAttribute' => ['material_id' => 'id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
     }
 
@@ -75,23 +77,8 @@ class ProductBase extends \yii\db\ActiveRecord
             'price_with_dds' => 'Price With Dds',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'order_id' => 'Order ID',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrderLists()
-    {
-        return $this->hasMany(OrderList::className(), ['product_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrders()
-    {
-        return $this->hasMany(Order::className(), ['id' => 'order_id'])->viaTable('order_list', ['product_id' => 'id']);
     }
 
     /**
@@ -108,5 +95,13 @@ class ProductBase extends \yii\db\ActiveRecord
     public function getMaterial()
     {
         return $this->hasOne(Material::className(), ['id' => 'material_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 }

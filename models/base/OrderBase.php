@@ -4,25 +4,24 @@ namespace app\models\base;
 
 use Yii;
 use app\models\Firm;
-use app\models\OrderList;
 use app\models\Product;
+
 /**
  * This is the model class for table "order".
  *
- * @property integer $id
- * @property integer $firm_id
- * @property integer $status
+ * @property int $id
+ * @property int $firm_id
+ * @property int $status
  * @property string $created_at
  * @property string $updated_at
  *
  * @property Firm $firm
- * @property OrderList[] $orderLists
  * @property Product[] $products
  */
 class OrderBase extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -30,7 +29,7 @@ class OrderBase extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -42,7 +41,7 @@ class OrderBase extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -66,16 +65,8 @@ class OrderBase extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrderLists()
-    {
-        return $this->hasMany(OrderList::className(), ['order_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getProducts()
     {
-        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('order_list', ['order_id' => 'id']);
+        return $this->hasMany(Product::className(), ['order_id' => 'id']);
     }
 }

@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
                 <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Изчисти', \yii\helpers\Url::to('user/index'), ['class' => 'btn btn-default'])?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to(['/user']), ['class' => 'btn btn-default'])?>
             </div>
         </div>
     </div>

@@ -77,11 +77,6 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Списък на поръчките',
-                'url' => ['/order-list'],
-                'visible' => !Yii::$app->user->isGuest
-            ],
-            [
                 'label' =>  Yii::$app->user->isGuest ? 'Влизане' : 'Излизане (' . Yii::$app->user->identity->username . ')',
                 'url' => Yii::$app->user->isGuest ? ['/site/login'] : ['/site/logout'],
                 'linkOptions' => ['class' => 'btn btn-link logout']

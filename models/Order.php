@@ -42,4 +42,17 @@ class Order extends OrderBase
             return false;
     }
 
+    public function getStatusLabel()
+    {
+        switch ($this->status)
+        {
+            case self::STATUS_PENDING:
+                return 'Pending';
+            case self::STATUS_DONE:
+                return 'Завършена';
+            default:
+                return null;
+        }
+    }
+
 }

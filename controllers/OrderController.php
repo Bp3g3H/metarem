@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\commands\InvoiceXlsExport;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
 use app\models\Order;
 use app\models\OrderSearch;
@@ -104,6 +106,25 @@ class OrderController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionExportInvoice($id)
+    {
+        $model = $this->findModel($id);
+
+        $invoiceExport = new InvoiceXlsExport($model);
+        $spreadsheet = $invoiceExport->export();
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="Предавателно-Приемателен Прoтокол 2.xls"');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
+        $writer->save('php://output');
+        exit;
     }
 
     /**

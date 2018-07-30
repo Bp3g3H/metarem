@@ -45,11 +45,7 @@ class Product extends ProductBase
             $order = $this->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();
 
             if (!$order)
-            {
-                $order = Order::create($this->firm_id);
-            }
-
-            OrderList::create($order->id, $this->id);
+                Order::create($this->firm_id);
         }
         parent::afterSave($insert, $changedAttributes);
     }
