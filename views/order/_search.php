@@ -15,20 +15,19 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'firm_id') ?>
-
-    <?= $form->field($model, 'status') ?>
-
-    <?= $form->field($model, 'created_at') ?>
-
-    <?= $form->field($model, 'updated_at') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <?= $form->field($model, 'firm_id')->label('Фирма') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'status')->label('Статус') ?>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group" style="margin-top: 25px;">
+                <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to(['/order']), ['class' => 'btn btn-default'])?>
+            </div>
+        </div>
 
     <?php ActiveForm::end(); ?>
 

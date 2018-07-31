@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Firm;
 use app\models\Material;
+use app\models\Order;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
@@ -56,8 +57,17 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $order = $model->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();
+
+            if (!$order)
+                $order = Order::create($model->firm_id);
+
+            $model->order_id = $order->id;
+
+            if($model->save())
+                return $this->redirect(['index']);
         } else {
             $firms =ArrayHelper::map(Firm::find()->all(), 'id', 'name');
             $materials = ArrayHelper::map(Material::find()->all(), 'id', 'name');
