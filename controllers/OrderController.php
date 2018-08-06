@@ -2,7 +2,8 @@
 
 namespace app\controllers;
 
-use app\commands\InvoiceXlsExport;
+use app\commands\OfferXlsExport;
+use app\commands\TransmissionAndAcceptanceProtocolXlsExport;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
 use app\models\Order;
@@ -43,18 +44,6 @@ class OrderController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Order model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -103,28 +92,54 @@ class OrderController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
+        if($model->delete())
+            Yii::$app->session->setFlash('success', "The order deleted!");
+        else
+            Yii::$app->session->setFlash('error', "There was a problem with deleting that order");
         return $this->redirect(['index']);
     }
 
-    public function actionExportInvoice($id)
+    public function actionExport($id, $type)
+    {
+        $model = $this->findModel($id);
+        if($model)
+        {
+            if($model->status == Order::STATUS_NEW && $type == Order::EXPORT_OFFER)
+            {
+                $model->status = Order::STATUS_PENDING;
+                $model->update(false);
+            }
+
+            $excelExport = $type ? new TransmissionAndAcceptanceProtocolXlsExport() : new OfferXlsExport();
+            $excelExport->loadData($model);
+            $excelExport = $excelExport->export();
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="Предавателно-Приемателен Прoтокол 2.xls"');
+            header('Cache-Control: max-age=0');
+            header('Cache-Control: max-age=1');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+            header('Cache-Control: cache, must-revalidate');
+            header('Pragma: public');
+            $writer = IOFactory::createWriter($excelExport, 'Xls');
+            $writer->save('php://output');
+            exit;
+        }
+    }
+
+    public function actionFinishOrder($id)
     {
         $model = $this->findModel($id);
 
-        $invoiceExport = new InvoiceXlsExport($model);
-        $spreadsheet = $invoiceExport->export();
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="Предавателно-Приемателен Прoтокол 2.xls"');
-        header('Cache-Control: max-age=0');
-        header('Cache-Control: max-age=1');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-        header('Cache-Control: cache, must-revalidate');
-        header('Pragma: public');
-        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
-        $writer->save('php://output');
-        exit;
+        $model->status = Order::STATUS_DONE;
+        if($model->update(false))
+            Yii::$app->session->setFlash('success', "The order was finished!");
+        else
+            Yii::$app->session->setFlash('error', "There was a problem with updating the order status");
+
+        return $this->redirect(['index']);
     }
 
     /**

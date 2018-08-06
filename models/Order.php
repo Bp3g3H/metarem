@@ -15,8 +15,16 @@ use yii\db\Expression;
 
 class Order extends OrderBase
 {
+    const EXPORT_PROTOCOL = 1;
+    const EXPORT_OFFER = 0;
+
+    const STATUS_NEW = 0;
     const STATUS_PENDING = 1;
     const STATUS_DONE = 2;
+
+    const STATUS_NEW_LABEL = 'Нова';
+    const STATUS_PENDING_LABEL = 'Изчакване';
+    const STATUS_DONE_LABEL = 'Завършена';
 
     public function behaviors()
     {
@@ -34,7 +42,7 @@ class Order extends OrderBase
     {
         $model = new Order();
         $model->firm_id = $firm_id;
-        $model->status = self::STATUS_PENDING;
+        $model->status = self::STATUS_NEW;
 
         if($model->save())
             return $model;
@@ -46,8 +54,10 @@ class Order extends OrderBase
     {
         switch ($this->status)
         {
+            case self::STATUS_NEW:
+                return 'Нова';
             case self::STATUS_PENDING:
-                return 'Pending';
+                return 'Изчакване';
             case self::STATUS_DONE:
                 return 'Завършена';
             default:
@@ -55,4 +65,12 @@ class Order extends OrderBase
         }
     }
 
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_NEW => self::STATUS_NEW_LABEL,
+            self::STATUS_PENDING => self::STATUS_PENDING_LABEL,
+            self::STATUS_DONE => self::STATUS_DONE_LABEL,
+        ];
+    }
 }

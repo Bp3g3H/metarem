@@ -12,6 +12,8 @@ use app\models\Order;
  */
 class OrderSearch extends Order
 {
+    public $firm_name;
+
     /**
      * @inheritdoc
      */
@@ -19,6 +21,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'firm_id', 'status'], 'integer'],
+            ['firm_name', 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -41,12 +44,24 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find();
+        $query = Order::find()->joinWith(['firm']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'status' => SORT_ASC
+                ],
+                'attributes' => [
+                    'firm_name' =>[
+                        'asc' => ['firm.name' => SORT_ASC],
+                        'desc' => ['firm.name' => SORT_DESC],
+                    ],
+                    'status'
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -59,12 +74,10 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'firm_id' => $this->firm_id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
+
+        $query->andFilterWhere(['like', 'firm.name', $this->firm_name]);
 
         return $dataProvider;
     }

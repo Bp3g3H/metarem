@@ -17,10 +17,10 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($model, 'firm_id')->label('Фирма') ?>
+            <?= $form->field($model, 'firm_name')->label('Фирма') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'status')->label('Статус') ?>
+            <?= $form->field($model, 'status')->dropDownList(\app\models\Order::getStatusArray())->label('Статус') ?>
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">
