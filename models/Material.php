@@ -12,6 +12,7 @@ namespace app\models;
 use app\models\base\MaterialBase;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 class Material extends MaterialBase
 {
@@ -25,5 +26,11 @@ class Material extends MaterialBase
                 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    public static function getMaterialsForDropdown()
+    {
+        $material = self::find()->all();
+        return ArrayHelper::map($material, 'id', 'name');
     }
 }

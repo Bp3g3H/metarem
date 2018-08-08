@@ -12,6 +12,7 @@ namespace app\models;
 use app\models\base\FirmBase;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 class Firm extends FirmBase
 {
@@ -25,5 +26,11 @@ class Firm extends FirmBase
                 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    public static function getFirmsForDropdown()
+    {
+        $firms = self::find()->all();
+        return ArrayHelper::map($firms, 'id', 'name');
     }
 }

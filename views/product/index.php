@@ -34,19 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'firm.name',
+                'attribute' => 'firm_name',
+                'value' => 'firm.name',
                 'label' => 'Фирма',
             ],
             [
-                'attribute' => 'material.price',
-                'label' => 'Цена на материала',
-                'content' => function($data)
-                {
-                    return $data->material->price . 'лв.';
-                }
-            ],
-            [
-                'attribute' => 'material.name',
+                'attribute' => 'material_name',
+                'value' => 'material.name',
                 'label' => 'Материала'
             ],
             [

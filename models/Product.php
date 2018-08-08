@@ -12,9 +12,21 @@ namespace app\models;
 use app\models\base\ProductBase;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 class Product extends ProductBase
 {
+    const LASER_CUTTING = 0;
+    const ENGRAVING = 1;
+    const PUNCHING = 2;
+    const BENDING = 3;
+
+    const LASER_CUTTING_STRING = 'Лазерно рязане';
+    const ENGRAVING_STRING = 'Гравиране';
+    const PUNCHING_STRING = 'Щанцоване';
+    const BENDING_STRING = 'Огъване';
+
+
     public function behaviors()
     {
         return [
@@ -29,11 +41,6 @@ class Product extends ProductBase
 
     public function beforeSave($insert)
     {
-        if($insert)
-        {
-
-        }
-
         $this->price_for_cutting = $this->price * $this->quantity;
         $this->full_weight = $this->weight * $this->quantity;
         $this->single_price_with_material = $this->price + ($this->weight * $this->material->price);
@@ -41,5 +48,15 @@ class Product extends ProductBase
         $this->price_with_dds = $this->full_price * 1.2;
 
         return parent::beforeSave($insert);
+    }
+
+    public static function getServices()
+    {
+        return [
+            self::LASER_CUTTING => self::LASER_CUTTING_STRING,
+            self::ENGRAVING => self::ENGRAVING_STRING,
+            self::PUNCHING => self::PUNCHING_STRING,
+            self::BENDING => self::BENDING_STRING,
+        ];
     }
 }

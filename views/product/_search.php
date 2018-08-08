@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'created_at')->label('Дата') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'firm_id')->label('Фирма') ?>
+            <?= $form->field($model, 'firm_id')->dropDownList(\app\models\Firm::getFirmsForDropdown())->label('Фирма') ?>
         </div>
         <div class="col-sm-2">
             <?= $form->field($model, 'product_name')->label('Детайл') ?>
@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'quantity')->label('Количество') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'material')->label('Материал') ?>
+            <?= $form->field($model, 'material')->dropDownList(\app\models\Material::getMaterialsForDropdown())->label('Материал') ?>
         </div>
         <div class="col-sm-2">
             <div class="form-group" style="margin-top: 25px;">

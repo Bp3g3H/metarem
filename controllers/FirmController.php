@@ -5,30 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Firm;
 use app\models\FirmSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FirmController implements the CRUD actions for Firm model.
  */
 class FirmController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Firm models.
      * @return mixed

@@ -5,30 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Material;
 use app\models\MaterialSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MaterialController implements the CRUD actions for Material model.
  */
 class MaterialController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Material models.
      * @return mixed

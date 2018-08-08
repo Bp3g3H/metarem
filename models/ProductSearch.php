@@ -12,6 +12,8 @@ use app\models\Product;
  */
 class ProductSearch extends Product
 {
+    public $firm_name;
+    public $material_name;
     /**
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'firm_id', 'quantity'], 'integer'],
-            [['product_name', 'material', 'created_at', 'updated_at'], 'safe'],
+            [['product_name', 'material_id', 'created_at', 'updated_at', 'firm_name', 'material_name'], 'safe'],
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
         ];
     }
@@ -42,13 +44,23 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
+        $query = Product::find()->joinWith(['firm', 'material']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['firm_name'] = [
+            'asc' => ['firm.name' => SORT_ASC],
+            'desc' => ['firm.name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['material_name'] = [
+            'asc' => ['material.name' => SORT_ASC],
+            'desc' => ['material.name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -60,22 +72,13 @@ class ProductSearch extends Product
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
             'firm_id' => $this->firm_id,
             'quantity' => $this->quantity,
-            'price' => $this->price,
-            'weight' => $this->weight,
-            'price_for_cutting' => $this->price_for_cutting,
-            'full_weight' => $this->full_weight,
-            'single_price_with_material' => $this->single_price_with_material,
-            'full_price' => $this->full_price,
-            'price_with_dds' => $this->price_with_dds,
+            'material_id' => $this->material_id,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'product_name', $this->product_name])
-            ->andFilterWhere(['like', 'material', $this->material]);
+        $query->andFilterWhere(['like', 'product_name', $this->product_name]);
 
         return $dataProvider;
     }

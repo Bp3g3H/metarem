@@ -37,21 +37,6 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             [
-                'label' => 'Home',
-                'url' => ['/site/index'],
-                'visible' => Yii::$app->user->isGuest
-            ],
-            [
-                'label' => 'About',
-                'url' => ['/site/about'],
-                'visible' => Yii::$app->user->isGuest
-            ],
-            [
-                'label' => 'Contact',
-                'url' => ['/site/contact'],
-                'visible' => Yii::$app->user->isGuest
-            ],
-            [
                 'label' => 'Потребители',
                 'url' => ['/user'],
                 'visible' => !Yii::$app->user->isGuest
@@ -77,7 +62,7 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' =>  Yii::$app->user->isGuest ? 'Влизане' : 'Излизане (' . Yii::$app->user->identity->username . ')',
+                'label' =>  Yii::$app->user->isGuest ? 'Вписване' : 'Излизане (' . Yii::$app->user->identity->username . ')',
                 'url' => Yii::$app->user->isGuest ? ['/site/login'] : ['/site/logout'],
                 'linkOptions' => ['class' => 'btn btn-link logout']
             ],
@@ -95,13 +80,11 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<!--<footer class="footer">-->
+<!--    <div class="container">-->
+<!--        <p class="pull-left">Metarem --><?//= date('Y') ?><!--</p>-->
+<!--    </div>-->
+<!--</footer>-->
 
 <?php $this->endBody() ?>
 </body>

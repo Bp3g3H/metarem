@@ -44,6 +44,7 @@ $config = [
             'showScriptName' => false,
             'enablePrettyUrl' => true,
             'rules' => [
+                '' => 'product/index'
             ],
         ],
 
