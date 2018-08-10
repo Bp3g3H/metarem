@@ -7,19 +7,20 @@ use Yii;
 /**
  * This is the model class for table "user".
  *
- * @property integer $id
+ * @property int $id
  * @property string $username
  * @property string $password
  * @property string $name
  * @property string $email
- * @property integer $status
+ * @property int $status
  * @property string $created_at
  * @property string $updated_at
+ * @property int $role
  */
 class UserBase extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -27,19 +28,19 @@ class UserBase extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['status'], 'integer'],
+            [['status', 'role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password', 'name', 'email'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -52,6 +53,7 @@ class UserBase extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'role' => 'Role',
         ];
     }
 }

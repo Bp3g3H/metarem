@@ -27,10 +27,10 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Метарем',
+        'brandLabel' => Html::img( Yii::$app->request->baseUrl . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'metarem logo.png', ['style' => 'width: auto; height: 35px; marging-bot']),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-blue navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([

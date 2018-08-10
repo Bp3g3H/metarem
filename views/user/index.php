@@ -11,7 +11,12 @@ $this->title = 'Потребители';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col-sm-10">
             <h1 style="margin-top: 0"><?= Html::encode($this->title) ?></h1>
@@ -42,6 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'name',
                 'label' => 'Име',
+            ],
+            [
+                'attribute' => 'role',
+                'label' => 'Роля',
+                'content' => function($data){
+                    if($data->role == \app\models\User::ROLE_ADMINISTRATOR)
+                        return \app\models\User::ROLE_ADMINISTRATOR_LABEL;
+                    else
+                        return \app\models\User::ROLE_EMPLOYEE_LABEL;
+                }
             ],
             [
                 'attribute' => 'email',

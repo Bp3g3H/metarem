@@ -8,6 +8,12 @@ use yii\db\Expression;
 
 class User extends UserBase implements \yii\web\IdentityInterface
 {
+    const ROLE_ADMINISTRATOR = 1;
+    const ROLE_EMPLOYEE = 2;
+
+    const ROLE_ADMINISTRATOR_LABEL = 'Администратор';
+    const ROLE_EMPLOYEE_LABEL = 'Служител';
+
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
 
@@ -103,6 +109,14 @@ class User extends UserBase implements \yii\web\IdentityInterface
         return [
             self::STATUS_INACTIVE => self::STATUS_INACTIVE_LABEL,
             self::STATUS_ACTIVE => self::STATUS_ACTIVE_LABEL,
+        ];
+    }
+
+    public static function getRoleArr()
+    {
+        return [
+            self::ROLE_ADMINISTRATOR => self::ROLE_ADMINISTRATOR_LABEL,
+            self::ROLE_EMPLOYEE => self::ROLE_EMPLOYEE_LABEL,
         ];
     }
 }

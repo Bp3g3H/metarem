@@ -4,9 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\LoginForm;
-use yii\web\Controller;
 
-class SiteController extends Controller
+class SiteController extends yii\web\Controller
 {
     /**
      * @inheritdoc

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use app\models\Firm;
 use app\models\FirmSearch;
@@ -12,6 +13,11 @@ use yii\web\NotFoundHttpException;
  */
 class FirmController extends Controller
 {
+    public function accessRules($rule, $action)
+    {
+        return Yii::$app->user->inRole(User::ROLE_ADMINISTRATOR);
+    }
+
     /**
      * Lists all Firm models.
      * @return mixed
@@ -49,6 +55,7 @@ class FirmController extends Controller
         $model = new Firm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Фирмата беше създадена успешно');
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -68,6 +75,7 @@ class FirmController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Фирмата беше обновена успешно');
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -85,7 +93,7 @@ class FirmController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Фирмата беше изтрита успешно');
         return $this->redirect(['index']);
     }
 

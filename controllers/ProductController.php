@@ -50,7 +50,10 @@ class ProductController extends Controller
             $model->order_id = $order->id;
 
             if($model->save())
+            {
+                Yii::$app->session->setFlash('success', 'Продукта беше създаден успешно');
                 return $this->redirect(['index']);
+            }
         } else {
             $firms =ArrayHelper::map(Firm::find()->all(), 'id', 'name');
             $materials = ArrayHelper::map(Material::find()->all(), 'id', 'name');
@@ -74,6 +77,7 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Продукта беше обновен успешно');
             return $this->redirect(['index']);
         } else {
             $firms =ArrayHelper::map(Firm::find()->all(), 'id', 'name');
@@ -96,7 +100,7 @@ class ProductController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Продукта беше изтрит успешно');
         return $this->redirect(['index']);
     }
 

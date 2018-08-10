@@ -22,6 +22,8 @@ use yii\widgets\ActiveForm;
 
     <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getStatusArr())->label('Статус') ?>
 
+    <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getRoleArr())->label('Роля') ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Създаване' : 'Актуализиране', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

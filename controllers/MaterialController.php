@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use app\models\Material;
 use app\models\MaterialSearch;
@@ -12,6 +13,11 @@ use yii\web\NotFoundHttpException;
  */
 class MaterialController extends Controller
 {
+    public function accessRules($rule, $action)
+    {
+        return Yii::$app->user->inRole(User::ROLE_ADMINISTRATOR);
+    }
+
     /**
      * Lists all Material models.
      * @return mixed
@@ -50,6 +56,7 @@ class MaterialController extends Controller
         $model = new Material();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Материала беше създадена успешно');
             return $this->redirect(['index']);
         }
 
@@ -70,6 +77,7 @@ class MaterialController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Материала беше обновена успешно');
             return $this->redirect(['index']);
         }
 
@@ -88,7 +96,7 @@ class MaterialController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Материала беше изтрит успешно');
         return $this->redirect(['index']);
     }
 

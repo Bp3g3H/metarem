@@ -12,6 +12,11 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
+    public function accessRules($rule, $action)
+    {
+        return Yii::$app->user->inRole(User::ROLE_ADMINISTRATOR);
+    }
+
     /**
      * Lists all User models.
      * @return mixed
@@ -49,6 +54,7 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Потребителя беше създаден успешно');
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -68,6 +74,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Потребителя беше обновен успешно');
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -85,7 +92,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Потребителя беше изтрит успешно');
         return $this->redirect(['index']);
     }
 
