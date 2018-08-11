@@ -45,6 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Фирма',
             ],
             [
+                'content' => function($data)
+                {
+                    return $data->displayServices();
+                }
+            ],
+            [
                 'attribute' => 'material_name',
                 'value' => 'material.name',
                 'label' => 'Материала'

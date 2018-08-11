@@ -49,9 +49,8 @@ class ProductBase extends \yii\db\ActiveRecord
         return [
             [['firm_id', 'quantity', 'material_id', 'order_id'], 'integer'],
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'services'], 'safe'],
             [['order_id'], 'required'],
-            [['services'], 'string'],
             [['product_name'], 'string', 'max' => 255],
             [['firm_id'], 'exist', 'skipOnError' => true, 'targetClass' => Firm::className(), 'targetAttribute' => ['firm_id' => 'id']],
             [['material_id'], 'exist', 'skipOnError' => true, 'targetClass' => Material::className(), 'targetAttribute' => ['material_id' => 'id']],

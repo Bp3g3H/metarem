@@ -5,7 +5,7 @@ namespace app\controllers;
 use yii\filters\AccessControl;
 use Yii;
 
-class Controller extends \yii\web\Controller
+class BaseController extends \yii\web\Controller
 {
     /**
      * @inheritdoc

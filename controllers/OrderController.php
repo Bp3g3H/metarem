@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
-class OrderController extends Controller
+class OrderController extends BaseController
 {
     /**
      * Lists all Order models.
@@ -95,11 +95,12 @@ class OrderController extends Controller
                 $model->update(false);
             }
 
+            $fileName = $type ? 'Предавателно-Приемателен Прoтокол.xls' : 'Оферта.xls';
             $excelExport = $type ? new TransmissionAndAcceptanceProtocolXlsExport() : new OfferXlsExport();
             $excelExport->loadData($model);
             $excelExport = $excelExport->export();
             header('Content-Type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment;filename="Предавателно-Приемателен Прoтокол 2.xls"');
+            header('Content-Disposition: attachment;filename="' . $fileName . '"');
             header('Cache-Control: max-age=0');
             header('Cache-Control: max-age=1');
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

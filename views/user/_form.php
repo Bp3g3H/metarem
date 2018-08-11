@@ -14,7 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label('Потребителско име') ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->label('Парола') ?>
+    <?php
+    if($model->isNewRecord)
+        $form->field($model, 'password')->passwordInput(['maxlength' => true])->label('Парола')
+    ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Име') ?>
 
@@ -22,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getStatusArr())->label('Статус') ?>
 
-    <?php  echo $form->field($model, 'status')->dropDownList(\app\models\User::getRoleArr())->label('Роля') ?>
+    <?php  echo $form->field($model, 'role')->dropDownList(\app\models\User::getRoleArr())->label('Роля') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Създаване' : 'Актуализиране', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

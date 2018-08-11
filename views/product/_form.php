@@ -19,9 +19,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'product_name')->textInput(['maxlength' => true])->label('Име на продукта') ?>
 
-    <?= $form->field($model, 'services')->checkboxList(\app\models\Product::getServices(), [
+    <?= $form->field($model, 'services_checkbox')->checkboxList(\app\models\Product::getServices(), [
         'item' => function($index, $label, $name, $checked, $value) {
-            return "<label><input type='checkbox' {$checked} class='services-checkbox' name='{$name}' value='{$value}'> {$label}</label>";
+        $check = $checked ? 'checked' : '';
+            return "<label><input type='checkbox' {$check} class='services-checkbox' name='{$name}' value='{$value}'> {$label}</label>";
         }
     ])->label('Услуги')?>
 
@@ -29,21 +30,34 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'material_id')->dropDownList($materials)->label('Материал') ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true])->label('Цена') ?>
-
     <?= $form->field($model, 'weight')->textInput(['maxlength' => true])->label('Тегло') ?>
 
-    <div id="laser-cutting-field" style="display: none">
-        <?= $form->field($model, 'services[' . \app\models\Product::LASER_CUTTING . ']')->textInput(['disabled' => true])->label('Цена лазерно рязане') ?>
+    <?php
+    $laserCuttingShow = isset($model->services[\app\models\Product::LASER_CUTTING_ABV]);
+    ?>
+    <div id="laser-cutting-field" style="<?= $laserCuttingShow ? ""  : 'display: none'?>">
+        <?= $form->field($model, 'services[' . \app\models\Product::LASER_CUTTING_ABV . ']')->textInput($laserCuttingShow ? [] : ['disabled' => true])->label('Цена лазерно рязане') ?>
     </div>
-    <div id="engraving-field" style="display: none">
-    <?= $form->field($model, 'quantity[' . \app\models\Product::ENGRAVING . ']')->textInput(['disabled' => true])->label('Цена гравиране') ?>
+
+    <?php
+    $engravingShow = isset($model->services[\app\models\Product::ENGRAVING_ABV]);
+    ?>
+    <div id="engraving-field" style="<?= $engravingShow ? ""  : 'display: none'?>">
+    <?= $form->field($model, 'services[' . \app\models\Product::ENGRAVING_ABV . ']')->textInput($engravingShow ? [] : ['disabled' => true])->label('Цена гравиране') ?>
     </div>
-    <div id="punching-field" style="display: none">
-    <?= $form->field($model, 'quantity[' . \app\models\Product::PUNCHING . ']')->textInput(['disabled' => true])->label('Цена щанцоване') ?>
+
+    <?php
+    $punchingShow = isset($model->services[\app\models\Product::PUNCHING_ABV]);
+    ?>
+    <div id="punching-field" style="<?= $punchingShow ? ""  : 'display: none'?>">
+    <?= $form->field($model, 'services[' . \app\models\Product::PUNCHING_ABV . ']')->textInput($punchingShow ? [] : ['disabled' => true])->label('Цена щанцоване') ?>
     </div>
-    <div id="bending-field" style="display: none">
-    <?= $form->field($model, 'quantity[' . \app\models\Product::BENDING . ']')->textInput(['disabled' => true])->label('Цена огъване') ?>
+
+    <?php
+    $bendingShow = isset($model->services[\app\models\Product::BENDING_ABV]);
+    ?>
+    <div id="bending-field" style="<?= $bendingShow ? ""  : 'display: none'?>">
+    <?= $form->field($model, 'services[' . \app\models\Product::BENDING_ABV . ']')->textInput($bendingShow ? [] : ['disabled' => true])->label('Цена огъване') ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Създаване' : 'Актуализиране', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

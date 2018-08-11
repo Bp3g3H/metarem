@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\StatsForm;
 use app\models\User;
 use Yii;
 use app\models\Material;
@@ -11,7 +12,7 @@ use yii\web\NotFoundHttpException;
 /**
  * MaterialController implements the CRUD actions for Material model.
  */
-class MaterialController extends Controller
+class MaterialController extends BaseController
 {
     public function accessRules($rule, $action)
     {
@@ -98,6 +99,17 @@ class MaterialController extends Controller
         $this->findModel($id)->delete();
         Yii::$app->session->setFlash('success', 'Материала беше изтрит успешно');
         return $this->redirect(['index']);
+    }
+
+    public function actionStats()
+    {
+        $model = new StatsForm();
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+
+        return $this->render('stats_index',[
+            'searchModel' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

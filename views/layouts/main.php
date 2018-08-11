@@ -39,12 +39,12 @@ AppAsset::register($this);
             [
                 'label' => 'Потребители',
                 'url' => ['/user'],
-                'visible' => !Yii::$app->user->isGuest
+                'visible' => Yii::$app->user->inRole(\app\models\User::ROLE_ADMINISTRATOR)
             ],
             [
                 'label' => 'Фирми',
                 'url' => ['/firm'],
-                'visible' => !Yii::$app->user->isGuest
+                'visible' => Yii::$app->user->inRole(\app\models\User::ROLE_ADMINISTRATOR)
             ],
             [
                 'label' => 'Продукти',
@@ -54,7 +54,7 @@ AppAsset::register($this);
             [
                 'label' => 'Материали',
                 'url' => ['/material'],
-                'visible' => !Yii::$app->user->isGuest
+                'visible' => Yii::$app->user->inRole(\app\models\User::ROLE_ADMINISTRATOR)
             ],
             [
                 'label' => 'Поръчки',

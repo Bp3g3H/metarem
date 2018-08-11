@@ -14,7 +14,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     /**
      * Lists all Product models.

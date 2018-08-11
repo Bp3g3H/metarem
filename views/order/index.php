@@ -47,16 +47,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'content' => function($data){
-                        if($data->status == \app\models\Order::STATUS_PENDING)
-                            return Html::a('<i class="fas fa-file-invoice-dollar"></i>', \yii\helpers\Url::to(['order/export', 'id' => $data->id, 'type' => \app\models\Order::EXPORT_PROTOCOL]));
-                        else
-                            return Html::a('<i class="far fa-file-alt"></i>', \yii\helpers\Url::to(['order/export', 'id' => $data->id, 'type' => \app\models\Order::EXPORT_OFFER]));
+                        return Html::a('<i class="far fa-file-alt"></i>', \yii\helpers\Url::to(['order/export', 'id' => $data->id, 'type' => \app\models\Order::EXPORT_OFFER]),['data-toggle'=> "tooltip", 'title' =>"Оферта"]);
                     },
                     'contentOptions' => ['style' => 'width: 3%']
                 ],
                 [
                     'content' => function($data){
-                            return Html::a('<i class="fas fa-history"></i>', \yii\helpers\Url::to(['order/finish-order', 'id' => $data->id]));
+                        return Html::a('<i class="fas fa-file-invoice-dollar"></i>', \yii\helpers\Url::to(['order/export', 'id' => $data->id, 'type' => \app\models\Order::EXPORT_PROTOCOL]), ['data-toggle'=> "tooltip", 'title' =>"Протокол"]);
+                    },
+                    'contentOptions' => ['style' => 'width: 3%']
+                ],
+                [
+                    'content' => function($data){
+                            return Html::a('<i class="fas fa-history"></i>', \yii\helpers\Url::to(['order/finish-order', 'id' => $data->id]), ['data-toggle'=> "tooltip", 'title' =>"Изпълнена поръчка"]);
                     },
                     'contentOptions' => ['style' => 'width: 3%']
                 ],
@@ -67,25 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'contentOptions' => ['style' => 'width: 3%']
                 ],
-                [
-                    'content' => function($data){
-                        return Html::a('<i class="fas fa-pen"></i>', \yii\helpers\Url::to(['order/update', 'id' => $data->id]));
-                    },
-                    'contentOptions' => ['style' => 'width: 3%']
-                ],
-//                [
-//                    'class' => 'yii\grid\ActionColumn',
-//                    'template' => '{exportOffer}{exportProtocol} {update} {delete}',
-//                    'buttons' => [
-//                        'exportProtocol' => function ($url, $model, $key) {
-//
-//                        },
-//                        'exportOffer' => function ($url, $model, $key) {
-//
-//                        },
-//                    ],
-//                    'contentOptions' => ['style' => 'width: 8%']
-//                ],
             ],
         ]); ?>
     </div>

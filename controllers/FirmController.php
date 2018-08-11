@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 /**
  * FirmController implements the CRUD actions for Firm model.
  */
-class FirmController extends Controller
+class FirmController extends BaseController
 {
     public function accessRules($rule, $action)
     {
