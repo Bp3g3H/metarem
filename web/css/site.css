@@ -115,11 +115,15 @@ a.desc:after {
 }
 
 .navbar-blue{
-    background-color: #0e112c;
-    border-color: #0f151f;
+    background-color: white;
+    border-color: #000080;
 }
 
 .navbar-brand{
     padding: 10px 15px!important;
+}
+
+a, a.logout{
+    color: #000080;
 }
 
