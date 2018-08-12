@@ -10,21 +10,20 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Вписване';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+<div class="site-login text-center">
     <h1><?= Html::encode($this->title) ?></h1>
-
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
         'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-7\">{error}</div>",
+            'template' => "<div class=\"col-md-2 col-md-offset-3\">{label}</div>\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>",
             'labelOptions' => ['class' => 'col-lg-1 control-label'],
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Потребителско име', ['style' => 'width: 170px']) ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Потребителско име', ['style' => 'white-space: nowrap;']) ?>
 
-        <?= $form->field($model, 'password')->passwordInput()->label('Парола', ['style' => 'width: 170px']) ?>
+        <?= $form->field($model, 'password')->passwordInput()->label('Парола') ?>
 
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"col-lg-offset-3 col-lg-2\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
@@ -35,6 +34,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::submitButton('Вписване', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
-
     <?php ActiveForm::end(); ?>
 </div>
