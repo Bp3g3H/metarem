@@ -19,9 +19,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         '//use.fontawesome.com/releases/v5.1.1/css/all.css',
+        'vendor/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css',
         'css/site.css',
     ];
     public $js = [
+        'vendor/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

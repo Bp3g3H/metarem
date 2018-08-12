@@ -41,7 +41,8 @@ class StatsForm extends Model
     {
         $query = Material::find()->select([
             'material.*',
-            'SUM(product.full_weight) as used_weight'
+            'SUM(product.full_weight) as used_weight',
+            'product.*',
         ])->joinWith(['products'])->groupBy('material.id')->asArray();
 
         $this->load($params);

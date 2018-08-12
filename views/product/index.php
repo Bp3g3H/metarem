@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 {
                     return $data->price . 'лв.';
                 },
-                'label' => 'Единична цена'
+                'label' => 'Ед цена'
             ],
             [
                 'attribute' => 'price_for_cutting',
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 {
                     return $data->price_for_cutting . 'лв.';
                 },
-                'label' => 'Общо цена за ЛР'
+                'label' => 'Общо цена'
             ],
             [
                 'attribute' => 'full_weight',
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 {
                     return $data->single_price_with_material . 'лв.';
                 },
-                'label' => 'Единична цена с материала'
+                'label' => 'Ед цена с материала'
             ],
             [
                 'attribute' => 'full_price',
@@ -123,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
-                'contentOptions' => ['style' => 'width: 3%']
+                'contentOptions' => ['style' => 'width: 3%; white-space: nowrap;']
             ],
         ],
     ]); ?>

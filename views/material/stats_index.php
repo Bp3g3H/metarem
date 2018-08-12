@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'columns' => [
                 [
-                    'header' => 'Продукт',
+                    'header' => 'Материал',
                     'attribute' => 'name',
                 ],
                 [
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 [
-                    'header' => 'Проходи',
+                    'header' => 'Приходи',
                     'content' => function($data){
                         return $data['used_weight'] * $data['price'] . 'лв';
                     }

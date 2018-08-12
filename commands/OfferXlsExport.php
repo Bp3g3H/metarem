@@ -138,7 +138,7 @@ class OfferXlsExport implements ExcelExport
             $this->xls->getActiveSheet()->setCellValue('E' . $rowCount, $product->single_price_with_material . 'лв');
             $this->xls->getActiveSheet()->getStyle('E' . $rowCount)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_MEDIUM);
             $this->xls->getActiveSheet()->getStyle('E' . $rowCount)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            $this->xls->getActiveSheet()->setCellValue('F' . $rowCount, $product->price_with_dds . 'лв');
+            $this->xls->getActiveSheet()->setCellValue('F' . $rowCount, $product->full_price . 'лв');
             $this->xls->getActiveSheet()->getStyle('F' . $rowCount)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_MEDIUM);
             $this->xls->getActiveSheet()->getStyle('F' . $rowCount)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 

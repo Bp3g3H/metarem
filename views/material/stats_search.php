@@ -11,44 +11,23 @@ use yii\widgets\ActiveForm;
 <div class="material-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
         'method' => 'get',
     ]); ?>
     <div class="row">
         <div class="col-sm-2">
-            <?= $form->field($model, 'name')->label('Продукт') ?>
+            <?= $form->field($model, 'name')->label('Материал') ?>
         </div>
-<!--        <div class='col-md-2    '>-->
-<!--            <div class="form-group">-->
-<!--                <div class='input-group date' id='datetimepicker-from'>-->
-<!--                    <input type='text' class="form-control" name="StatsForm[search_from]"/>-->
-<!--                    <span class="input-group-addon">-->
-<!--                    <span class="glyphicon glyphicon-calendar"></span>-->
-<!--                </span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class='col-md-2'>-->
-<!--            <div class="form-group">-->
-<!--                <div class='input-group date' id='datetimepicker-to'>-->
-<!--                    <input type='text' class="form-control" name="StatsForm[search_to]"/>-->
-<!--                    <span class="input-group-addon">-->
-<!--                    <span class="glyphicon glyphicon-calendar"></span>-->
-<!--                </span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
         <div class="col-sm-2">
-            <?= $form->field($model, 'search_from')->label('От') ?>
+            <?= $form->field($model, 'search_from')->textInput(['class'=>'datepicker form-control'])->label('От') ?>
         </div>
         <div class="col-sm-2">
-            <?= $form->field($model, 'search_to')->label('До') ?>
+            <?= $form->field($model, 'search_to')->textInput(['class'=>'datepicker form-control'])->label('До') ?>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div class="form-group" style="margin-top: 25px;">
                 <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Изчисти', \yii\helpers\Url::to(['/material']), ['class' => 'btn btn-default'])?>
+                <?= Html::a('Изчисти', \yii\helpers\Url::to(['material/stats']), ['class' => 'btn btn-default'])?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>
@@ -56,17 +35,10 @@ use yii\widgets\ActiveForm;
 </div>
 <?php
 $script = <<<JS
-    $(function () {
-        $('#datetimepicker-from').datetimepicker();
-        $('#datetimepicker-to').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-        $("#datetimepicker-from").on("dp.change", function (e) {
-            $('#datetimepicker-to').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker-to").on("dp.change", function (e) {
-            $('#datetimepicker-from').data("DateTimePicker").maxDate(e.date);
-        });
+    $('.datepicker').datetimepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        minView: 2
     });
 JS;
 

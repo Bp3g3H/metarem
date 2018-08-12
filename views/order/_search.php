@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         <div class="col-sm-2">
             <?= $form->field($model, 'status')->dropDownList(\app\models\Order::getStatusArray())->label('Статус') ?>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div class="form-group" style="margin-top: 25px;">
                 <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Изчисти', \yii\helpers\Url::to(['/order']), ['class' => 'btn btn-default'])?>
