@@ -42,7 +42,7 @@ class ProductController extends BaseController
 
         if ($model->load(Yii::$app->request->post()))
         {
-            $order = $model->firm->getOrders()->where('status = :status', [':status' => Order::STATUS_PENDING])->one();
+            $order = $model->firm->getOrders()->where('status <> :status', [':status' => Order::STATUS_DONE])->one();
 
             if (!$order)
                 $order = Order::create($model->firm_id);

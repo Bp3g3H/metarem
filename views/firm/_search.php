@@ -21,9 +21,6 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'name')->label('Име') ?>
             </div>
             <div class="col-sm-3">
-                <?php  echo $form->field($model, 'country')->label('Държава') ?>
-            </div>
-            <div class="col-sm-3">
                 <?php  echo $form->field($model, 'owner_name')->label('Собственик') ?>
             </div>
             <div class="col-sm-3">

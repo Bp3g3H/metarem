@@ -25,9 +25,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'product_name')->label('Детайл') ?>
         </div>
         <div class="col-md-2">
-            <?= $form->field($model, 'material')->dropDownList(\app\models\Material::getMaterialsForDropdown())->label('Материал') ?>
+            <?= $form->field($model, 'material_id')->dropDownList(\app\models\Material::getMaterialsForDropdown())->label('Материал') ?>
         </div>
-        <div class="col-md-3 col-lg-2">
+        <div class="col-md-3">
             <div class="form-group" style="margin-top: 25px;">
                 <?= Html::submitButton('Търсене', ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Изчисти', \yii\helpers\Url::to(['/product']), ['class' => 'btn btn-default'])?>

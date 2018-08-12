@@ -4,27 +4,28 @@ namespace app\models\base;
 
 use Yii;
 use app\models\Order;
+use app\models\Product;
 
 /**
  * This is the model class for table "firm".
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $address
  * @property string $phone_number
  * @property string $city
- * @property string $country
  * @property string $owner_name
  * @property string $created_at
  * @property string $updated_at
  *
  * @property Order[] $orders
+ * @property Product[] $products
  */
 class FirmBase extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -32,19 +33,19 @@ class FirmBase extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'email', 'address', 'city', 'country', 'owner_name'], 'string', 'max' => 255],
+            [['name', 'email', 'address', 'city', 'owner_name'], 'string', 'max' => 255],
             [['phone_number'], 'string', 'max' => 15],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -55,7 +56,6 @@ class FirmBase extends \yii\db\ActiveRecord
             'address' => 'Address',
             'phone_number' => 'Phone Number',
             'city' => 'City',
-            'country' => 'Country',
             'owner_name' => 'Owner Name',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -68,5 +68,13 @@ class FirmBase extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['firm_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['firm_id' => 'id']);
     }
 }

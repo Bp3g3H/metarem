@@ -40,6 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'label' => '№',
+                'content' => function($data){
+                    return $data->order->id;
+                },
+                'contentOptions' => ['style' => 'width: 3%']
+            ],
+            [
                 'attribute' => 'firm_name',
                 'value' => 'firm.name',
                 'label' => 'Фирма',
@@ -61,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'quantity',
-                'label' => 'Количество'
+                'label' => 'Брой'
             ],
             [
                 'attribute' => 'weight',
@@ -109,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 {
                     return $data->full_price . 'лв.';
                 },
-                'label' => 'Общо цена с материала'
+                'label' => 'Цена без ДДС'
             ],
             [
                 'attribute' => 'price_with_dds',

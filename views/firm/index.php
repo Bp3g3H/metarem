@@ -36,10 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Име',
             ],
             [
-                'attribute' => 'country',
-                'label' => 'Държава',
-            ],
-            [
                 'attribute' => 'city',
                 'label' => 'Град',
             ],

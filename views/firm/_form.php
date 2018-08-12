@@ -22,8 +22,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'city')->textInput(['maxlength' => true])->label('Град') ?>
 
-    <?= $form->field($model, 'country')->textInput(['maxlength' => true])->label('Държава') ?>
-
     <?= $form->field($model, 'owner_name')->textInput(['maxlength' => true])->label('Собственик') ?>
 
     <div class="form-group">

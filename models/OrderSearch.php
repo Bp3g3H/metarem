@@ -12,7 +12,6 @@ use app\models\Order;
  */
 class OrderSearch extends Order
 {
-    public $firm_name;
 
     /**
      * @inheritdoc
@@ -21,7 +20,6 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'firm_id', 'status'], 'integer'],
-            ['firm_name', 'string'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -59,7 +57,8 @@ class OrderSearch extends Order
                         'asc' => ['firm.name' => SORT_ASC],
                         'desc' => ['firm.name' => SORT_DESC],
                     ],
-                    'status'
+                    'status',
+                    'id',
                 ]
             ],
         ]);
@@ -75,9 +74,8 @@ class OrderSearch extends Order
         // grid filtering conditions
         $query->andFilterWhere([
             'status' => $this->status,
+            'firm_id' => $this->firm_id,
         ]);
-
-        $query->andFilterWhere(['like', 'firm.name', $this->firm_name]);
 
         return $dataProvider;
     }

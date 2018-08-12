@@ -13,7 +13,6 @@ use app\models\Product;
 class ProductSearch extends Product
 {
     public $firm_name;
-    public $material_name;
     /**
      * @inheritdoc
      */
@@ -21,7 +20,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'firm_id', 'quantity'], 'integer'],
-            [['product_name', 'material_id', 'created_at', 'updated_at', 'firm_name', 'material_name'], 'safe'],
+            [['product_name', 'material_id', 'created_at', 'updated_at', 'firm_name'], 'safe'],
             [['price', 'weight', 'price_for_cutting', 'full_weight', 'single_price_with_material', 'full_price', 'price_with_dds'], 'number'],
         ];
     }
@@ -78,7 +77,7 @@ class ProductSearch extends Product
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'product_name', $this->product_name]);
+        $query->andFilterWhere(['like', 'material.name', $this->product_name]);
 
         return $dataProvider;
     }

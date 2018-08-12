@@ -35,6 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'columns' => [
                 [
+                    'attribute' => 'id',
+                    'label' => '№',
+                    'contentOptions' => ['style' => 'width: 3%']
+                ],
+                [
                     'attribute' => 'firm_name',
                     'value' => 'firm.name',
                     'label' => 'Фирма',

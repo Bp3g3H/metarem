@@ -19,7 +19,7 @@ class FirmSearch extends Firm
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'address', 'phone_number', 'city', 'country', 'owner_name', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'email', 'address', 'phone_number', 'city', 'owner_name', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -69,7 +69,6 @@ class FirmSearch extends Firm
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'phone_number', $this->phone_number])
             ->andFilterWhere(['like', 'city', $this->city])
-            ->andFilterWhere(['like', 'country', $this->country])
             ->andFilterWhere(['like', 'owner_name', $this->owner_name]);
 
         return $dataProvider;

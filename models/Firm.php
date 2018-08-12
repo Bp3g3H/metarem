@@ -11,6 +11,7 @@ namespace app\models;
 
 use app\models\base\FirmBase;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ArrayDataProvider;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
@@ -26,6 +27,13 @@ class Firm extends FirmBase
                 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    public function rules()
+    {
+        return ArrayHelper::merge(parent::rules(),[
+            ['name', 'unique', 'message' => 'Фирма с това име вече съществува!']
+        ]);
     }
 
     public static function getFirmsForDropdown()

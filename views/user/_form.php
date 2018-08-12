@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?php
     if($model->isNewRecord)
-        $form->field($model, 'password')->passwordInput(['maxlength' => true])->label('Парола')
+        echo $form->field($model, 'password')->passwordInput(['maxlength' => true])->label('Парола');
     ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Име') ?>
