@@ -78,6 +78,9 @@ class TransmissionAndAcceptanceProtocolXlsExport implements ExcelExport
         $this->xls->getActiveSheet()->getStyle('C5')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
         $this->xls->getActiveSheet()->getRowDimension('5')->setRowHeight(18);
         $this->xls->getActiveSheet()->mergeCells('D5:E5');
+        $this->xls->getActiveSheet()->setCellValue('D5', $this->order->id);
+        $this->xls->getActiveSheet()->getStyle("D5:E5")->getFont()->setSize(14)->setBold(true);
+        $this->xls->getActiveSheet()->getStyle('D5:E5')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
         $this->xls->getActiveSheet()->mergeCells('F5:H5');
         $this->xls->getActiveSheet()->setCellValue('F5', date('d-m-Y') . 'г');
         $this->xls->getActiveSheet()->getStyle("F5:H5")->getFont()->setSize(14)->setBold(true);
