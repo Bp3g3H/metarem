@@ -126,10 +126,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'label' => 'Цена с ДДС'
             ],
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
+                'buttons' => [
+                    'delete' => function($url, $model){
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
+                            'class' => '',
+                            'data' => [
+                                'confirm' => 'Сигурни ли сте че искате да изтриете този продукт',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    }
+                ],
                 'contentOptions' => ['style' => 'width: 3%; white-space: nowrap;']
             ],
         ],

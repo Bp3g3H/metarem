@@ -127,3 +127,19 @@ a, a.logout{
     color: #000080;
 }
 
+.site-login{
+    background-image: url("../images/TrumpfMashine.png");
+    background-repeat: no-repeat;
+    background-size: 60% 90%;
+    background-position: right;
+    height: 500px;
+}
+
+/*.login-img{*/
+    /*width: auto;*/
+    /*float: right;*/
+    /*height:400px;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*right: 0;*/
+/*}*/

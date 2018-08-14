@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\base\UserBase;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 class User extends UserBase implements \yii\web\IdentityInterface
 {

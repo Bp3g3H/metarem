@@ -53,17 +53,17 @@ AppAsset::register($this);
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Материали',
-                'url' => ['/material'],
-                'visible' => Yii::$app->user->inRole(\app\models\User::ROLE_ADMINISTRATOR)
-            ],
-            [
                 'label' => 'Поръчки',
                 'url' => ['/order'],
                 'visible' => !Yii::$app->user->isGuest
             ],
             [
-                'label' => 'Статисика',
+                'label' => 'Материали',
+                'url' => ['/material'],
+                'visible' => Yii::$app->user->inRole(\app\models\User::ROLE_ADMINISTRATOR)
+            ],
+            [
+                'label' => 'Статистика',
                 'url' => ['/material/stats'],
                 'visible' => !Yii::$app->user->isGuest
             ],

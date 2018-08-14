@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ChangePasswordForm;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -81,6 +82,22 @@ class UserController extends BaseController
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionChangePassword($id)
+    {
+        $model = new ChangePasswordForm($id);
+
+        if(Yii::$app->request->isPost)
+        {
+            if($model->load(Yii::$app->request->post()) && $model->validate() && $model->changePassword())
+            {
+                Yii::$app->session->setFlash('success', 'Паролата беше сменена успешно');
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('change_password_form', ['model' => $model]);
     }
 
     /**

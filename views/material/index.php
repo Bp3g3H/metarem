@@ -52,6 +52,17 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
+                'buttons' => [
+                    'delete' => function($url, $model){
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
+                            'class' => '',
+                            'data' => [
+                                'confirm' => 'Сигурни ли сте че искате да изтриете този материал',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    }
+                ],
                 'contentOptions' => ['style' => 'width: 5%']
             ],
         ],

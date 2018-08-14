@@ -68,6 +68,9 @@ class OfferXlsExport implements ExcelExport
         $this->xls->getActiveSheet()->setCellValue('B4', '№');
         $this->xls->getActiveSheet()->getStyle("B4")->getFont()->setSize(14)->setBold(true);
         $this->xls->getActiveSheet()->getStyle('B4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+        $this->xls->getActiveSheet()->setCellValue('C4', $this->order->id);
+        $this->xls->getActiveSheet()->getStyle("C4")->getFont()->setSize(14)->setBold(true);
+        $this->xls->getActiveSheet()->getStyle('C4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
         $this->xls->getActiveSheet()->getRowDimension('4')->setRowHeight(18);
         $this->xls->getActiveSheet()->mergeCells('D4:F4');
         $this->xls->getActiveSheet()->setCellValue('D4', date('d-m-Y') . 'г');

@@ -68,13 +68,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'contentOptions' => ['style' => 'width: 5%'],
-                'template' => '{update} {delete}',
-                'visibleButtons' => [
-                    'delete' => function($model){
-                        return $model->id != Yii::$app->user->id;
+                'template' => '{password_change} {update} {delete}',
+                'buttons' => [
+                    'delete' => function($url, $model){
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], [
+                            'class' => '',
+                            'data' => [
+                                'confirm' => 'Сигурни ли сте че искате да изтриете този потребител',
+                                'method' => 'post',
+                            ],
+                        ]);
                     },
-                ]
+                    'password_change' => function($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-lock"></span>', ['change-password', 'id' => $model->id]);
+                    }
+                ],
+                'visibleButtons' => [
+                        'delete' => function($model){
+                            return $model->id != Yii::$app->user->id;
+                        },
+                ],
+                'contentOptions' => ['style' => 'width: 6%']
             ],
         ],
     ]); ?>

@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'content' => function($data){
 
-                        return Html::a('<i class="fas fa-trash-alt"></i>', \yii\helpers\Url::to(['order/delete', 'id' => $data->id]));
+                        return Html::a('<i class="fas fa-trash-alt"></i>', \yii\helpers\Url::to(['order/delete', 'id' => $data->id]), ['class' => 'delete-order-button']);
                     },
                     'contentOptions' => ['style' => 'width: 3%']
                 ],
@@ -79,3 +79,21 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     </div>
 </div>
+<?php
+
+$script = <<<JS
+$(function(){
+    $('.delete-order-button').on('click', function(event) {
+        var confirm_flag = confirm("Сигуни ли сте че искате да изтриете тази поръчка?");
+        
+        if(!confirm_flag)
+            event.preventDefault();
+    })
+        
+});
+JS;
+
+$this->registerJs($script, \yii\web\View::POS_END);
+
+
+?>
