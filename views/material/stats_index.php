@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => 'Използвано количество',
                     'attribute' => 'used_weight',
                     'content' => function($data){
-                        return $data['used_weight'] . 'кг';
+                        return $data['used_weight'] ? $data['used_weight'] . 'кг' : '0кг';
                     }
                 ],
                 [

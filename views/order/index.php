@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $script = <<<JS
 $(function(){
     $('.delete-order-button').on('click', function(event) {
-        var confirm_flag = confirm("Сигуни ли сте че искате да изтриете тази поръчка?");
+        var confirm_flag = confirm("Сигурни ли сте че искате да изтриете тази поръчка?");
         
         if(!confirm_flag)
             event.preventDefault();
