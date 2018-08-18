@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'status',
+                    'label' => 'Статус',
                     'content' => function($data){
                         return $data->getStatusLabel();
                     }
