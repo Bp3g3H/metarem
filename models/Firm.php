@@ -32,7 +32,7 @@ class Firm extends FirmBase
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(),[
-            ['name', 'unique', 'message' => 'Фирма с това име вече съществува!']
+            ['name', 'unique', 'message' => 'Фирма с това име вече съществува!1']
         ]);
     }
 
